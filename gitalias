@@ -1,0 +1,57 @@
+[alias]
+    addm = !git-ls-files -m -z | xargs -0 git-add && git status
+    addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
+    amend = commit --amend -S
+    b = branch
+    ba = branch -a
+    changes = diff --name-status
+    ci = commit -S
+    clab = "!f() { git clb && git branch -D master && git co master && git branch -D develop && git co develop; }; f;"
+    clamb = !git clmb && git branch -r --merged | grep origin | grep -v master | grep -v develop | sed -e 's_/_ :_g' | xargs -rl echo git push
+    clb = "!f() { git f && git co develop && for b in `git b | grep -v master | grep -v develop`; do git branch -D $b; done; }; f;"
+    clmb = !git co develop && git branch --merged | grep -v master | grep -v develop | xargs -rl git branch -D
+    co = checkout
+    commit = commit -S
+    cp = cherry-pick -ex
+    csfixer = !git-ls-files -m | xargs -l php-cs-fixer fix --dry-run --level=psr2 --ansi --diff --verbose
+    dic = diff --cached
+    diffstat = diff --stat
+    f = fetch --all -p
+    fm = !git f && git co $2 && git pull && git co $1 && git pull && git merge $2
+    forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -D"
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    graphstat = log --graph --all --decorate --stat --date=iso
+    graphx = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+    in = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    info = remote -v
+    lc = !git oneline ORIG_HEAD.. --stat --no-merges
+    lin = log --pretty=oneline --abbrev-commit --graph ..@{u}
+    lint  = !git st --porcelain | grep -e '^[AUM ][UM ].*\\.php$' | awk '{print $2}' | xargs -L 1 php -l
+    list-alias = !git config --get-regexp alias | sort
+    lout = log --pretty=oneline --abbrev-commit --graph @{u}..
+    lv = log --name-status
+    mate = !git-ls-files -m -z | xargs -0 vim
+    mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 vim
+    oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1'
+    oneline = log --pretty=oneline --abbrev-commit --graph
+    out = !git fetch && git lout
+    pa = submodule foreach git pull origin master
+    pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+    rmm = !git ls-files -d -z | xargs -0 git-rm && git status
+    rmorig = !find . -name *.orig -type f | xargs -rl echo rm -rf
+    sa = "!sh -c 'git stash apply stash@{$1}' -"
+    sd = !sh -c \"git stash drop stash@{$1}\" -
+    search-file = !git log --all --full-history --name-only -- $1
+    search-string = !sh -c \"git log --all --full-history --name-only -S $1\"
+    serve = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+    sl = stash list
+    slm = !echo $(git log --author=\"$(git config user.name)\" --no-merges --before=$(date \"+%Y-%m-01T00:00\") --after=$(date -d \"-$(date +%d) days -1 month\" \"+%Y-%m-%dT23:59\") --reverse | grep commit | wc -l) commits, $(git log --author=\"$(git config user.name)\" --no-merges --before=$(date \"+%Y-%m-01T00:00\") --after=$(date -d \"-$(date +%d) days -1 month\" \"+%Y-%m-%dT23:59\") --reverse --stat | grep -Eo \"[0-9]{1,} files? changed\" | grep -Eo \"[0-9]{1,}\" | awk \"{ sum += \\$1 } END { print sum }\") files changed, $(git log --author=\"$(git config user.name)\" --no-merges --before=$(date \"+%Y-%m-01T00:00\") --after=$(date -d \"-$(date +%d) days -1 month\" \"+%Y-%m-%dT23:59\") --reverse --stat | grep -Eo \"[0-9]{1,} insertions?\" | grep -Eo \"[0-9]{1,}\" | awk \"{ sum += \\$1 } END { print sum }\") insertions and $(git log --author=\"$(git config user.name)\" --no-merges --before=$(date \"+%Y-%m-01T00:00\") --after=$(date -d \"-$(date +%d) days -1 month\" \"+%Y-%m-%dT23:59\") --reverse --stat | grep -Eo \"[0-9]{1,} deletions?\" | grep -Eo \"[0-9]{1,}\" | awk \"{ sum += \\$1 } END { print sum }\") deletions last month
+    sp = stash pop
+    ss = stash save
+    st = status
+    sw = "!sh -c 'git stash show -p stash@{$1}' -"
+    tags = tag
+    undo = reset --soft HEAD^
+    unstage = !git reset HEAD
+    unstash = stash pop
+    who = shortlog -sne
