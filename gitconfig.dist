@@ -3,33 +3,34 @@
     email = MAIL
 
 [include]
-    path = ~/.gitalias
+	path = ~/.gitalias
 
 [branch]
 	autosetuprebase = always
 
 [color]
-    ui = true
+	ui = true
 
 [color "diff"]
-    meta = cyan bold
-    frag = yellow
-    old = red bold
-    new = green bold
+	meta = cyan bold
+	frag = yellow
+	old = red bold
+	new = green bold
 
 [merge]
-    tool = vimdiff
-    renamelimit = 5000
+	tool = vimdiff
+	renamelimit = 5000
 
 [push]
-    default = simple
+	default = simple
 
 [pull]
-    rebase = true
+	rebase = true
 
 [rebase]
-    stat = true
-    autosquash = true
+	stat = true
+	autosquash = true
+	autoStash = true
 
 [core]
-    whitespace = trailing-space,space-before-tab,indent-with-non-tab,-tab-in-indent,cr-at-eol
+	whitespace = trailing-space,space-before-tab,indent-with-non-tab,-tab-in-indent,cr-at-eol
