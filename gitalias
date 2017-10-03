@@ -17,6 +17,7 @@
     dic = diff --cached
     diffstat = diff --stat
     f = fetch --all -p
+    fixup = commit --fixup
     fm = !git f && git co $2 && git pull && git co $1 && git pull && git merge $2
     forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -D"
     graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
