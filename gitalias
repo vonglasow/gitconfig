@@ -2,21 +2,20 @@
     addm = !git-ls-files -m -z | xargs -0 git-add && git status
     addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
     amend = commit --amend -S
-    b = branch
+    b = !git-branch -vv | cut -c1 --complement | awk '{print $1,$3}' | sed -e 's_:_]_g'
     ba = branch -a
+    branches = branch -a
     changes = diff --name-status
     ci = commit -S
-    clab = "!f() { git clb && git branch -D master && git co master && git branch -D develop && git co develop; }; f;"
-    clamb = !git clmb && git branch -r --merged | grep origin | grep -v master | grep -v develop | sed -e 's_/_ :_g' | xargs -rl echo git push
-    clb = "!f() { git f && git co develop && for b in `git b | grep -v master | grep -v develop`; do git branch -D $b; done; }; f;"
-    clmb = !git co develop && git branch --merged | grep -v master | grep -v develop | xargs -rl git branch -D
     co = checkout
     commit = commit -S
     cp = cherry-pick -ex
-    csfixer = !git-ls-files -m | xargs -l php-cs-fixer fix --dry-run --level=psr2 --ansi --diff --verbose
-    dic = diff --cached
+    csfixer = !git-ls-files -m | xargs -l -I{} php-cs-fixer fix {} --dry-run --ansi --diff --verbose --config-file .php_cs
+    dic = diff --cached --color-words=.
+    diff = diff --color-words=.
     diffstat = diff --stat
     f = fetch --all -p
+    fixcs = !git status --short | grep "^\\s*[MARC]" | awk '{print $2}' | xargs -rl php-cs-fixer fix --ansi --config-file .php_cs
     fixup = commit --fixup
     fm = !git f && git co $2 && git pull && git co $1 && git pull && git merge $2
     forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -D"
