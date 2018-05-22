@@ -1,4 +1,4 @@
-git: ~/.gitconfig ~/.gitalias
+git: ~/.gitconfig ~/.gitalias ~/.gitsetup
 
 gitconfig:
 	$(eval USER := $(shell bash -c 'read -p "User: " user; echo $$user'))
@@ -13,7 +13,10 @@ gitconfig:
 ~/.gitalias:
 	ln -s $(CURDIR)/gitalias $@
 
+~/.gitsetup:
+	ln -s $(CURDIR)/gitsetup $@
+
 clean:
 	@echo 'Remove Git config'
-	rm -rf ~/.gitconfig ~/.gitalias gitconfig
+	rm -rf ~/.gitconfig ~/.gitalias gitconfig ~/.gitsetup
 
