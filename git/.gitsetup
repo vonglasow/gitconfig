@@ -1,0 +1,32 @@
+[branch]
+	autosetuprebase = always
+
+[color]
+	ui = true
+
+[color "diff"]
+	meta = cyan bold
+	frag = yellow
+	old = red bold
+	new = green bold
+
+[merge]
+	tool = vimdiff
+	renamelimit = 5000
+
+[push]
+	default = simple
+
+[commit]
+	#gpgsign = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	stat = true
+	autosquash = true
+	autoStash = true
+
+[core]
+	whitespace = trailing-space,space-before-tab,indent-with-non-tab,-tab-in-indent,cr-at-eol
