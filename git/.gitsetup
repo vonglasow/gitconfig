@@ -18,7 +18,7 @@
 	default = simple
 
 [commit]
-	#gpgsign = true
+	gpgsign = true
 
 [pull]
 	rebase = true
@@ -29,4 +29,4 @@
 	autoStash = true
 
 [core]
-	whitespace = trailing-space,space-before-tab,indent-with-non-tab,-tab-in-indent,cr-at-eol
+	whitespace = trailing-space,space-before-tab,-indent-with-non-tab,-tab-in-indent,cr-at-eol

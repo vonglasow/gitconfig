@@ -1,27 +1,18 @@
-git: git/.gitconfig ~/bin
+GIT_SIGNING_KEY=$(shell gpg --list-keys $(GIT_AUTHOR_EMAIL) | grep -v "^pub\\|^uid" | grep -o '.\{8\}$$')
+
+include .env
+
+git: git/.gitconfig
 	stow -t ~ -S git
-	stow -t ~/bin -S bin
-
-~/bin:
-	if grep "export PATH="\$$HOME/bin:\$$PATH"" ~/.profile; then \
-		echo "PATH Already defined in .profile file";\
-	else \
-		echo "export PATH=\"\$$HOME/bin:\$$PATH\""¬ >> ~/.profile;\
-		/bin/cat ~/.profile;\
-	fi
-	mkdir ~/bin
-	. ~/.profile
-
-git/.gitconfig:
-	$(eval USER := $(shell bash -c 'read -p "User: " user; echo $$user'))
-	$(eval MAIL := $(shell bash -c 'read -p "Email: " mail; echo $$mail'))
-	cp $(CURDIR)/gitconfig.dist $@
-	sed 's#USER#$(USER)#g' -i $@
-	sed 's#MAIL#$(MAIL)#g' -i $@
 
 clean:
 	@echo 'Remove Git config'
 	stow -t ~ -D git
-	stow -t ~/bin -D bin
-	rm -rf git/gitconfig
+	rm -rf git/.gitconfig
 
+git/.gitconfig:
+	cp gitconfig.dist $@
+	git config --global user.name "$(GIT_AUTHOR_NAME)"
+	git config --global user.email "$(GIT_AUTHOR_EMAIL)"
+	git config --global github.user "$(GITHUB_USER)"
+	git config --global user.signingkey "$(GIT_SIGNING_KEY)"
