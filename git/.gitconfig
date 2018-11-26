@@ -1,7 +1,0 @@
-[user]
-	name = sdf
-	email = sdf
-
-[include]
-	path = ~/.gitalias
-	path = ~/.gitsetup
