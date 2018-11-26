@@ -1,0 +1,21 @@
+#!/bin/bash
+
+case $1 in
+	pro)
+		git config --local user.email "PROEMAIL"
+		;;
+	perso)
+		git config --local user.email "PERSOEMAIL"
+		;;
+	*)
+		echo "Master, I am here to serve you!";
+		echo "========================"
+		echo "You are currently known as"
+		git config --get-regexp user
+		echo "========================"
+		echo "Usage: $0 {pro|perso}"
+		exit 1
+esac
+
+echo "You are now known as"
+git config --local --get-regexp user

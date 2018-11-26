@@ -17,7 +17,7 @@
 	fixcs = !git status --short | grep "^\\s*[MARC]" | awk '{print $2}' | xargs -rl php-cs-fixer fix --ansi --config-file .php_cs
 	fixup = commit --fixup
 	fm = !git f && git co $2 && git pull && git co $1 && git pull && git merge $2
-	forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -D"
+	forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	graphstat = log --graph --all --decorate --stat --date=iso
 	graphx = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
@@ -36,6 +36,7 @@
 	out = !git fetch && git lout
 	pa = submodule foreach git pull origin master
 	pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+	revival = !git checkout $(git rev-list -n 1 HEAD -- "$1")~1 -- "$1"
 	rmm = !git ls-files -d -z | xargs -0 git-rm && git status
 	rmorig = !find . -name *.orig -type f | xargs -rl echo rm -rf
 	sa = "!sh -c 'git stash apply stash@{$1}' -"
