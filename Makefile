@@ -7,7 +7,10 @@ K := $(foreach exec,$(EXECUTABLES),\
 include .env
 
 git: git/.gitconfig
-	stow -t ~ -S git
+	git config --global user.name "$(GIT_AUTHOR_NAME)"
+	git config --global user.email "$(GIT_AUTHOR_EMAIL)"
+	git config --global github.user "$(GITHUB_USER)"
+	git config --global user.signingkey "$(GIT_SIGNING_KEY)"
 
 clean:
 	@echo 'Remove Git config'
@@ -16,7 +19,4 @@ clean:
 
 git/.gitconfig:
 	cp gitconfig.dist $@
-	git config --global user.name "$(GIT_AUTHOR_NAME)"
-	git config --global user.email "$(GIT_AUTHOR_EMAIL)"
-	git config --global github.user "$(GITHUB_USER)"
-	git config --global user.signingkey "$(GIT_SIGNING_KEY)"
+	stow -t ~ -S git

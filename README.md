@@ -7,8 +7,9 @@
 ## Install
 
 ```
-git clone git@github.com:vonglasow/gitconfig.git
+git clone git@github.com:vonglasow/gitconfig.git gitconfig
 cd !$
+cp .env.dit
 make git
 ```
 
