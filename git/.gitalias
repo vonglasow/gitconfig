@@ -19,6 +19,7 @@
 	fm = !git f && git co $2 && git pull && git co $1 && git pull && git merge $2
 	forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	get-config-file = !git config --list --show-origin | awk '{print $1}' | sort -u
 	graphstat = log --graph --all --decorate --stat --date=iso
 	graphx = !GIT_PAGER='less -FRSX' git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
 	in = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
