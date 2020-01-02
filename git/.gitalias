@@ -55,4 +55,5 @@
 	undo = reset --soft HEAD^
 	unstage = !git reset HEAD
 	unstash = stash pop
+	url = !echo $(git remote get-url origin | tr -s ":" "/" | sed "s#git@#https://#")
 	who = shortlog -sne
