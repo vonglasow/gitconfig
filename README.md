@@ -9,7 +9,7 @@
 ```
 git clone git@github.com:vonglasow/gitconfig.git gitconfig
 cd !$
-cp .env.dit
+cp .env.dist .env
 make git
 ```
 
