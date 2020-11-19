@@ -37,6 +37,7 @@
 	out = !git fetch && git lout
 	pa = submodule foreach git pull origin master
 	pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+	recommit = !git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG
 	revival = !git checkout $(git rev-list -n 1 HEAD -- "$1")~1 -- "$1"
 	rmm = !git ls-files -d -z | xargs -0 git-rm && git status
 	rmorig = !find . -name *.orig -type f | xargs -rl echo rm -rf
