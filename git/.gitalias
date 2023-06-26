@@ -28,6 +28,7 @@
 	lin = log --pretty=oneline --abbrev-commit --graph ..@{u}
 	lint  = !git st --porcelain | grep -e '^[AUM ][UM ].*\\.php$' | awk '{print $2}' | xargs -L 1 php -l
 	list-alias = !git config --get-regexp alias | sort
+	logs = log
 	lout = log --pretty=oneline --abbrev-commit --graph @{u}..
 	lv = log --name-status
 	mate = !git-ls-files -m -z | xargs -0 vim
