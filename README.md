@@ -17,3 +17,7 @@ make git
 
 * `git list-alias`
 * `git config -l`
+
+## Contributions
+
+Open issues or make a PR.
