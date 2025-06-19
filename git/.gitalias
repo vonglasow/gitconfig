@@ -27,6 +27,7 @@
 	lc = !git oneline ORIG_HEAD.. --stat --no-merges
 	lin = log --pretty=oneline --abbrev-commit --graph ..@{u}
 	lint  = !git st --porcelain | grep -e '^[AUM ][UM ].*\\.php$' | awk '{print $2}' | xargs -L 1 php -l
+	list = "!f() { if [ \"$1\" = \"--all\" ]; then files=$(git status --porcelain | awk '{print $2}'); else files=$(git status --porcelain | grep -v '^??' | awk '{print $2}'); fi; [ -z \"$files\" ] && echo \"No files to display.\" && exit 1; selected=$(echo \"$files\" | fzf); [ -n \"$selected\" ] && vim \"$selected\"; }; f"
 	list-alias = !git config --get-regexp alias | sort
 	logs = log
 	lout = log --pretty=oneline --abbrev-commit --graph @{u}..
